@@ -1,0 +1,14 @@
+{
+  "name": "example-marketplace",
+  "description": "Replace this with your marketplace's description.",
+  "owner": {
+    "name": "your-name"
+  },
+  "plugins": [
+    {
+      "name": "example-plugin",
+      "source": "./",
+      "description": "Replace this with your plugin's description."
+    }
+  ]
+}
