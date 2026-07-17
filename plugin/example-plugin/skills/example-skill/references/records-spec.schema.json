@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/records-spec.schema.json",
+  "title": "Records summary spec",
+  "description": "Input for the example skill: numeric records to summarize, with an optional category filter.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["records"],
+  "properties": {
+    "label": {
+      "type": "string",
+      "description": "Human-readable name for the summary."
+    },
+    "category": {
+      "type": "string",
+      "description": "Optional filter; only records whose category equals this value are summarized."
+    },
+    "records": {
+      "type": "array",
+      "description": "The records to summarize.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["category", "value"],
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "Category the record belongs to."
+          },
+          "value": {
+            "type": "number",
+            "description": "Numeric value contributed by the record."
+          }
+        }
+      }
+    }
+  }
+}

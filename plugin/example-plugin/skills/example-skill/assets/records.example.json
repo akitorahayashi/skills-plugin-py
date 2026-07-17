@@ -1,0 +1,9 @@
+{
+  "label": "Q3 spend by team",
+  "records": [
+    { "category": "design", "value": 1200 },
+    { "category": "design", "value": 800 },
+    { "category": "engineering", "value": 3000 },
+    { "category": "marketing", "value": 500 }
+  ]
+}
