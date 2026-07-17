@@ -49,15 +49,15 @@ functions split by skill into directories. They assert each CLI's process
 boundary (exit code, the stdout and stderr JSON, any written files), not internal
 functions.
 
-- `tests/conftest.py` provides a subprocess runner that invokes a skill CLI and a
-  fixture that writes a config to `tmp_path`.
+- `tests/conftest.py` provides a subprocess runner that invokes a skill CLI with
+  the given arguments.
 - `tests/example_skill/` verifies the example CLI by concern: `test_summary.py`
   covers the reported shape and the empty-result path, and `test_errors.py`
-  covers the config and runtime errors.
+  covers non-numeric arguments.
 
-Enumerate matrix cases with `@pytest.mark.parametrize` and keep temporary state
-in `tmp_path`. Tests assert behavior observable at the CLI boundary and do not
-fix internal composition.
+Enumerate matrix cases with `@pytest.mark.parametrize`, and keep any temporary
+state in `tmp_path`. Tests assert behavior observable at the CLI boundary and do
+not fix internal composition.
 
 ## CLI contract
 
@@ -68,10 +68,8 @@ configuration or runtime error. On exit 2, the CLI prints JSON to stderr carryin
 an `action` describing what the user should fix.
 
 The example CLI,
-`plugin/example-plugin/skills/example-skill/scripts/summarize_records.py`,
-validates its config against
-`plugin/example-plugin/skills/example-skill/references/records-spec.schema.json`
-and reports a summary.
+`plugin/example-plugin/skills/example-skill/scripts/summarize.py`, takes a list of
+numbers as arguments and reports their count, sum, min, max, and mean.
 
 ## Distribution boundary
 

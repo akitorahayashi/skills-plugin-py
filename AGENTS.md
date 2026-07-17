@@ -23,10 +23,10 @@ repository root and never ship.
   Schema (optional).
 - `plugin/example-plugin/skills/<name>/assets/` — example configs and sample
   inputs (optional).
-- `plugin/example-plugin/skills/example-skill/scripts/summarize_records.py` — the
-  example CLI. Reads a JSON config, validates it, summarizes records. Exit 0
-  non-empty result, exit 1 valid config with no match, exit 2 config or runtime
-  error (stderr JSON with an `action`).
+- `plugin/example-plugin/skills/example-skill/scripts/summarize.py` — the example
+  CLI. Takes numbers as arguments and prints count/sum/min/max/mean. Exit 0 a
+  result, exit 1 no numbers given, exit 2 a non-numeric argument (stderr JSON with
+  an `action`).
 - `plugin/example-plugin/.claude-plugin/plugin.json`,
   `plugin/example-plugin/.codex-plugin/plugin.json`,
   `plugin/example-plugin/plugin.json` — the per-client manifests.
@@ -43,8 +43,8 @@ repository root and never ship.
 - Each CLI prints exactly one JSON document on stdout and uses exit codes 0
   (affirmative), 1 (negative), 2 (error). Errors are JSON on stderr carrying an
   actionable `action`.
-- No silent fallbacks. Unknown keys, wrong types, and invalid input fail before
-  work begins rather than degrading the result.
+- No silent fallbacks. Invalid input fails before work begins rather than
+  degrading the result.
 - Skills are auto-discovered from `skills/`. Manifests carry only per-client
   identity and never duplicate a skill body.
 
