@@ -6,9 +6,6 @@ resolution-markers = [
     "python_full_version < '3.15'",
 ]
 
-[options]
-prerelease-mode = "disallow"
-
 [[package]]
 name = "ast-serialize"
 version = "0.6.0"

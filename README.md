@@ -21,9 +21,7 @@ skills-plugin-py/
 │       └── skills/
 │           └── example-skill/
 │               ├── SKILL.md                   # name comes from frontmatter
-│               ├── scripts/summarize_records.py   # stdlib-only CLI, one JSON document, exit codes 0/1/2
-│               ├── references/records-spec.schema.json  # strict spec the CLI validates against
-│               └── assets/records.example.json         # example config
+│               └── scripts/summarize.py       # stdlib-only CLI, one JSON document, exit codes 0/1/2
 ├── .claude-plugin/
 │   └── marketplace.json                       # distribution catalog; git-subdir source -> plugin/example-plugin
 ├── tests/
@@ -61,13 +59,14 @@ Each manifest lives inside `plugin/example-plugin/`.
 ## The example skill
 
 `plugin/example-plugin/skills/example-skill` demonstrates the conventions every
-skill in this template follows. Its CLI reads a JSON config, validates it against
-`references/records-spec.schema.json`, summarizes the records, and prints one
-JSON document. It shows the whole contract: argparse arguments, standard-library
-imports only, explicit validation with an actionable error, and exit codes 0
-(a non-empty result), 1 (a valid config with no matching record), and 2 (a config
-or runtime error, reported as JSON on stderr with an `action`). Rename the
-directory and replace the skill with your own.
+skill in this template follows. Its CLI takes a list of numbers as arguments and
+prints their count, sum, min, max, and mean as one JSON document. It shows the
+whole contract: argparse arguments, standard-library imports only, explicit
+validation with an actionable error, and exit codes 0 (a result), 1 (no numbers
+given), and 2 (a non-numeric argument, reported as JSON on stderr with an
+`action`). A skill needs only a `SKILL.md` and, here, a `scripts/` directory;
+optional `references/` and `assets/` directories are supported when a skill needs
+them. Rename the directory and replace the skill with your own.
 
 ## Runtime and development separation
 
@@ -107,8 +106,9 @@ full workflow and the CLI contract.
    `plugin/<name>/skills/example-skill/` to your skill's name and rewrite its
    `SKILL.md`. The `name` frontmatter sets the invocation name; the `description`
    frontmatter is the sentence the agent reads to decide when to use the skill,
-   so make it a specific trigger. Replace the CLI under `scripts/`, and the
-   `references/` and `assets/` files, with your own.
+   so make it a specific trigger. Replace the CLI under `scripts/` with your own,
+   and add optional `references/` and `assets/` directories if your skill needs
+   them.
 2. Replace `example-plugin` with your plugin name (kebab-case) in the three
    manifests, and `example-marketplace` / `your-name` / the git-subdir `url` in
    `.claude-plugin/marketplace.json`.
